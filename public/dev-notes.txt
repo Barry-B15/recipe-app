@@ -1,0 +1,57 @@
+1. clean up, open App.js, delete everything in the <header>
+2. sign up for api at edamam.com
+3. create a form inside the <div> in APP.js
+4. useEffect, this is what runs everytime ouur page relaods
+    we need one here
+    - import {useEffect, useState} from 'react'
+    - def a counter and set the value to (0)
+    - def useEffect just above return
+   
+    - change search in the btn to {counter}
+    - add onClick to the btn and increment by 1
+5. In console refresh and see that our useEffect runs the first time the page runs
+    it will also run everytime something changes on the page or re-renders
+    - if we want this to run only once, eg when the page 1st renders, we can add a 2nd param ({},[]) the [] array to our useEffect def.
+    Now refresh, click on the '0', see in console, it runs only once
+    Good we don't want to run this 1million times
+    If we want it to run only when the counter changes, we do [counter]
+6. Now we know what useEffect does, delete the <h1> with the counter, delete the counter def, and the console.log in useEffect
+7. Now lets def an async func below useEffect()  to fech our recipe
+ - then call the async getRecipe() in useEffect in place of console.log
+ - see that we are now getting the data in console
+ - we are interested in the "hits"
+ - Lets change our console.log in getRecipe to console.log(data.hits)
+
+8. Now def a state to handle the data we get from the api const [recipe, setRecipes]
+- replace console.log(data.hits); with 
+    setRecipes(data.hits);
+
+9. Lets create a Recipe component so we can map thru it
+ src > create Recipe.js
+ - import the new file Recipe.js to App.js
+
+10. we want to display our content on the page and remember we staored everything in [recipe]
+- scroll down to under the form in App.js
+- map the objects in the array:
+   {recipe.map(recipe => (
+       <Recipe />
+   ) )}
+   This outputs the Title and Calories we added in our Recipe.js
+
+11. To get the actual data from the api we say:
+recipe(the one we stored the data).recipe(from the data tree in console).label(from console)
+We have something like this:
+{recipe.map(recipe => (
+       <Recipe title={recipe.recipe.label} calories={recipe.recipe.calories} image={ recipe.recipe.image} />
+   ) )}
+
+12. Now in Recipes.js we can pull the props into the component like this:
+const Recipe = ({title, calories, image}) => {
+    return(
+        <div>
+        <h1>{title}</h1>
+        <p>{calories}</p>
+        <img src={image} alt="" />
+    );
+};
+Here we are taking things from the state and passing it to the props
