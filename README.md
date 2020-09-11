@@ -66,3 +66,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Tecnologies Used
+
+* node.js
+* react.js
+* webpack
+* CSS
+* Javascript
+* HTML
+* Bootstrap
+* Edamam Recipe Search API
+
+### Source
+Original codes at Dev Ed youtube video
