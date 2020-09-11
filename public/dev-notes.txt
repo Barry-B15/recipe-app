@@ -1,3 +1,6 @@
+Source: Dev Ed
+https://youtu.be/U9T6YkEDkMo
+
 1. clean up, open App.js, delete everything in the <header>
 2. sign up for api at edamam.com
 3. create a form inside the <div> in APP.js
@@ -55,3 +58,110 @@ const Recipe = ({title, calories, image}) => {
     );
 };
 Here we are taking things from the state and passing it to the props
+
+13. Warning: Each child in a list should have a unique "key" prop.
+Fix: go to App.js > scroll to return(), in <Recipe />, and declare a key={//whatever the title is. can be something unique but this will work}
+
+<Recipe
+key={recipe.recipe.label}
+//---------------- />
+
+14. We want to be able to search for things, 
+- declare a state for that somewhere at the top area
+    const [search, setSearch] = useState('');
+
+- add a value atrr to input and set it to the search we just defined
+    <input className="search-bar" type="text" value={search} />
+
+- still in input, add an onChange() to handle the changes
+    <input className="search-bar" type="text" value={search} onChange={} />
+
+- def a function (just above return) to run when changes happens
+    const updateSearch = e => {
+        setSearch(e.target.value); // when a user types in the search this event will run and modify the empty useState("") to whatever was entered, the value of the input
+    
+    console.log(search); // view the changes in the console
+    }
+
+- now pass the updateSearch to onChange so it runs when a user enters a search
+    onChange={updateSearch}
+
+15. The problem with this is that it runs everytime a user types a letter,we want to run only when user clicks the search btn:
+- def another useState for this
+    const [query, setQuery] = useState('chicken'); // set to "chicken" since that is what we have as the query in our api url
+- set the "chicken" in our url to "query" now as
+        `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${API_KEY}`;
+
+16. Def getSearch to get the search query
+        const getSearch = e => {
+            e.preventDefault(); // prevent the page refresh
+            setQuery(search); // setQuery to whatever we have in our search to get the finished text
+            setSearch('');  // set search back to null to clear the query after search is completed
+        }
+17. Now add onSubmit to the form and set it to getSearch to handle whatever the user submits:
+ <form onSubmit={getSearch} className="search-form">
+
+18. Until now our useEffect only runs when the page 1st loads and remains redundant. We didn't use it for our search as it will update many times and we didn't want that. Now that we have a "query" which will update only when we hit the submit button, we can add the "query" to the array and it will only run when we hit "Search" btn
+        useEffect(() => {
+            getRecipes();
+        }, [query]);
+
+19. Let's get the recipes' ingredients, add ingredient to <recipe>:
+    <Recipe 
+    ..........
+    ingredients={recipe.recipe.ingredients}
+    />
+    This is actually another array so we have to loop thru it
+    - Go to Recipe.js to add ingredients:
+        const Recipe = ({ title, calories, image, ingredients }) => {
+            return (
+                <div>
+                  <h1> { title } </h1>     
+                  <ol> 
+                    {ingredients.map(ingredient => ( 
+                      <li> { ingredient.text } </li>
+                    )) } 
+                  </ol>  
+                  <p> { calories } </p>  
+                  <img src = { image } alt = "" / >
+                </div>
+            )
+        }
+
+20. Let's add some styling to our page
+    - delete all the content of App.css
+    Do:
+        .App {
+            min-height: 100vh;
+            background-image: 'background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);'
+        } // from: https://webgradients.com for some free background gradients
+
+        - add other styles (see App.css)
+
+21. We can create a css module to encapsulate our components. This allows us to use the same name in diff places and our css will not care about those names but will only the one it was defined for
+An Example;
+    - create recipe.module.css in src folder
+    The classes that we write here will only be related to Recipe.js
+
+    - add styles in the module
+        .recipe {
+            //------ styles
+        }
+    - Then import the module to Recipe.js
+        import style from './recipe.module.css';
+
+    - to use the style in the <h1> we add it so:
+        <h1 className = { style.recipe } > { title } </h1>
+    OR to add it to the whole div we do:
+        <div className = { style.recipe } > 
+            // content
+        </div>
+
+    - To style the image from the module, create an image style in the module
+        .image {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+    - Then add it to the <img> in Recipe.js the same way we did above (surprised we didn't need to import this time)
+            <img className = { style.image } src = { image } alt = "" / >

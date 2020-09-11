@@ -1,7 +1,41 @@
 .App {
-  text-align: center;
+    /* text-align: center; */
+    min-height: 100vh;
+    /* background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%); */
+    background-image: linear-gradient(to top, #dbdcd7 0%, #dddcd7 24%, #e2c9cc 30%, #e7627d 46%, #b8235a 59%, #801357 71%, #3d1635 84%, #1c1a27 100%);
 }
 
+.search-form {
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar {
+    width: 50%;
+    border: none;
+    padding: 10px;
+}
+
+.search-button {
+    background: lightcoral;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+}
+
+.recipes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+
+/* We can create a css module to encapsulate our components. This allows us to use the same name in diff places and our css will not care about those names but will only the one it was defined for */
+
+
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -36,3 +70,4 @@
     transform: rotate(360deg);
   }
 }
+ */
