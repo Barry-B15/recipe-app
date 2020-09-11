@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+dev-notes.txt 
+APP_ID = 'f5d94d31';
+API_KEY = "50dd58ce94210228fac942b4902dae09";

@@ -4,8 +4,8 @@ import './App.css';
 
 const App = () => {
 
-    const APP_ID = 'f5d94d31';
-    const API_KEY = "50dd58ce94210228fac942b4902dae09";
+    const APP_ID = 'ADD-YOUR-ID';
+    const API_KEY = "ADD-YOUR-KEY";
 
     // def a state to handle the response data from the api
     const [recipes, setRecipes] = useState([]);
@@ -76,8 +76,8 @@ const App = () => {
                 / >
             ))
         } <
-        /div>  <
-        /div>
+        /div>  < /
+        div >
     );
 
 
